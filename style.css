@@ -27,10 +27,8 @@ body {
     background-color: #282c34;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
-    margin: 20px;
+    width: 600px;
+    position: relative;
 }
 
 #menu {
@@ -57,6 +55,15 @@ body {
     background-repeat: no-repeat;
     background-position:center
 }
+
+#cenas-modo {
+    width: 800px;
+    height: 500px;
+    border: 2px solid black;
+    overflow: hidden;
+    position: relative;
+}
+
 /* Estilo dos botões quadrados */
 .menu-btn {
     width: 150px; /* Largura do botão */
