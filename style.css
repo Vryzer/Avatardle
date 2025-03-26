@@ -56,7 +56,16 @@ body {
 #falas{
     background-image: url('img/falas.png');
     background-size: contain;
-    background-position:center
+    background-position:center;
+}
+
+#falas-modo{
+    background-color: #0055ff;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: absolute;
 }
 
 #cenas {
