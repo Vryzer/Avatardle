@@ -1,0 +1,80 @@
+/* Definindo a fonte principal */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:cursive
+}
+
+/* Cor de fundo geral e estilo de body */
+body {
+    background-image: url('img/wallpaper.jpg');
+    background-size: cover; /* pra deixar a imagem na tela toda*/
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #ffffff; /* Cor do texto */
+    font-size: 24px;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Container principal do jogo */
+#game-container {
+    background-color: #282c34;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 600px;
+    margin: 20px;
+}
+
+#menu {
+    display: flex; /* Flexbox para alinhar os botões lado a lado */
+    gap: 20px; /* Espaço entre os botões */
+    justify-content: center; /* Centraliza os botões */
+}
+
+#classico {
+    background-image: url('img/classico.png');
+    background-size: contain;
+    background-position:center
+}
+
+#falas{
+    background-image: url('img/falas.png');
+    background-size: contain;
+    background-position:center
+}
+
+#cenas {
+    background-image: url('img/cenas.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center
+}
+/* Estilo dos botões quadrados */
+.menu-btn {
+    width: 150px; /* Largura do botão */
+    height: 150px; /* Altura do botão igual à largura, tornando-o quadrado */
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items:end;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color:black;
+}
+
+/* Efeito de hover para o botão */
+.menu-btn:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do botão */
+}

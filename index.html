@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <!--aqui tem os dados, utf-8 é pros caracteres do teclado, http-equiv com o Edge é pro navegador, viewport com width é pra deixar o site bonitinho pra dispositivo movel, description é pra por exemplo mandar pra alguem no whatsapp aparece o conteudo, keywords sao pro algoritmo do google ajudar a entender o site, author pra caso faça mais de 1 site valorizar tambem pro algoritmo do google-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Um Wordle de Avatar">
+    <meta name="keywords" content="Avatar, ATLA, wordle">
+    <meta name="author" content="Vryzer">
+    <title>Avatardle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>Avatardle</h1>
+        <p>Escolha um modo de jogo:</p>
+        <div id="menu">
+            <button class="menu-btn" id="classico" onclick="mostrarModo('classico')">Clássico
+            </button>
+            <button class="menu-btn" id="falas" onclick="mostrarModo('falas')">Falas
+            </button>
+            <button class="menu-btn" id="cenas" onclick="mostrarModo('cenas')">Cenas     
+            </button>
+        </div>
+
+       <!-- Conteúdo dinâmico será inserido aqui -->
+       <div id="conteudo">
+        <!-- O modo selecionado será exibido aqui -->
+    </div>
+
+    <!-- Modo Clássico -->
+    <div id="classico-modo" class="modo" style="display:none;">
+        <h2>Modo Clássico: Adivinha o Personagem</h2>
+        <input type="text" id="input-palavra" placeholder="Digite o nome do personagem">
+        <button id="botao-enviar">Enviar</button>
+        <div id="resultado"></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
