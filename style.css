@@ -58,34 +58,11 @@ body {
     background-position:center;
 }
 
-#falas-modo{
-    background-color: #0055ff;
-    top: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 #cenas {
     background-image: url('img/cenas.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position:center
-}
-
-#cenas-modo {
-    width: 100%;
-    height: auto;
-    border: 2px solid black;
-    overflow: hidden; /*se uma imagem for maior q width ou height n vai aparecer o resto dela*/
-    position:relative;
-}
-
-#imagem-cena {
-    max-width: 400px; /* Garante que a imagem não ultrapasse os limites */
-    height:auto;
-    display: block;
-    margin: 10px auto; /* Centraliza a imagem */
 }
 
 
