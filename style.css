@@ -36,43 +36,22 @@ body {
     background-color: #282c34;
     padding: 20px;
     border-radius: 10px;
-    width: 600px;
+    width: 700px;
+    height: 600px;
     position: relative;
+    overflow: auto;
+
 }
 
+/* Estilo do menu inicial */
 #menu {
-    display: flex; /* Flexbox para alinhar os botões lado a lado */
-    gap: 20px; /* Espaço entre os botões */
-    justify-content: center; /* Centraliza os botões */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
-#classico {
-    background-image: url('img/classico.png');
-    background-size: contain;
-    background-position:center
-}
-
-#falas{
-    background-image: url('img/falas.png');
-    background-size: contain;
-    background-position:center;
-}
-
-#cenas {
-    background-image: url('img/cenas.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position:center
-}
-
-#imagem-cena {
-    max-width: 400px; /* Garante que a imagem não ultrapasse os limites */
-    height:auto;
-    display: block;
-    margin: 10px auto; /* Centraliza a imagem */
-}
-
-/* Estilo dos botões quadrados */
+/* Estilo do botão jogar */
 .menu-btn {
     width: 150px; /* Largura do botão */
     height: 150px; /* Altura do botão igual à largura, tornando-o quadrado */
@@ -87,9 +66,238 @@ body {
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     color:black;
+    background-image: url('img/classico.png');
+    background-size: cover;
+    background-position: center;
 }
 
 /* Efeito de hover para o botão */
 .menu-btn:hover {
     transform: scale(1.1); /* Aumenta o tamanho do botão */
+}
+
+/* Estilos para o modo clássico */
+#classico-modo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+#classico-modo h2 {
+    color: #61dafb;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#input-palavra {
+    padding: 10px 15px;
+    font-size: 18px;
+    border: 2px solid #61dafb;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    color: white;
+    width: 300px;
+    text-align: center;
+}
+
+#input-palavra:focus {
+    outline: none;
+    border-color: #21a0c4;
+    box-shadow: 0 0 10px rgba(97, 218, 251, 0.3);
+}
+
+/* Estilos para o dropdown de sugestões */
+#character-suggestions {
+    background-color: #1e1e1e;
+    color: white;
+    border: 1px solid #61dafb;
+    border-radius: 4px;
+}
+
+#character-suggestions option {
+    background-color: #1e1e1e;
+    color: white;
+    padding: 8px;
+}
+
+#character-suggestions option:hover {
+    background-color: #2d2d2d;
+}
+
+#botao-enviar {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #61dafb;
+    color: #1e1e1e;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#botao-enviar:hover {
+    background-color: #21a0c4;
+}
+
+/* Estilos para as caixas de características */
+.characteristic-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 15px 0;
+    justify-content: center;
+}
+
+.characteristic-box {
+    background-color: #2d2d2d;
+    border: 2px solid #444;
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-width: 80px;
+    flex: 0 0 auto;
+}
+
+.characteristic-box.correct {
+    background-color: #2d5a2d;
+    border-color: #4caf50;
+}
+
+.characteristic-box.incorrect {
+    background-color: #5a2d2d;
+    border-color: #f44336;
+}
+
+.characteristic-name {
+    font-size: 10px;
+    color: #aaa;
+    margin-bottom: 3px;
+}
+
+.characteristic-value {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Estilos para tentativas anteriores */
+.previous-guesses {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+.previous-attempt {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+}
+
+.attempt-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.attempt-image {
+    flex-shrink: 0;
+}
+
+.attempt-info {
+    flex: 1;
+}
+
+.attempt-name {
+    font-weight: bold;
+    color: #61dafb;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.attempt-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Estilos para imagens dos personagens */
+.character-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #444;
+}
+
+.character-img.large {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    border: 3px solid #61dafb;
+}
+
+/* Estilos para mensagens de vitória e fim de jogo */
+.victory-message, .game-over-message {
+    text-align: center;
+    padding: 20px;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.victory-content, .game-over-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.victory-image, .game-over-image {
+    flex-shrink: 0;
+}
+
+.victory-text, .game-over-text {
+    flex: 1;
+}
+
+.victory-message h2 {
+    color: #4caf50;
+    margin-bottom: 15px;
+}
+
+.game-over-message h2 {
+    color: #f44336;
+    margin-bottom: 15px;
+}
+
+.restart-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #61dafb;
+    color: #1e1e1e;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.restart-btn:hover {
+    background-color: #21a0c4;
+}
+
+.attempt-status {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #ff9800;
+}
+
+.current-attempt {
+    margin-bottom: 20px;
 }

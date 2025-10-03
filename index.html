@@ -14,50 +14,33 @@
 <body>
     <div id="game-container">
         <h1>Avatardle</h1>
-        <p>Escolha um modo de jogo:</p>
+        
+        <!-- Menu inicial -->
         <div id="menu">
-            <button class="menu-btn" id="classico" onclick="mostrarModo('classico')">Clássico
-            </button>
-            <button class="menu-btn" id="falas" onclick="mostrarModo('falas')">Falas
-            </button>
-            <button class="menu-btn" id="cenas" onclick="mostrarModo('cenas')">Cenas     
-            </button>
+            <button class="menu-btn" onclick="iniciarJogo()">Jogar</button>
         </div>
 
-       <!-- Conteúdo dinâmico será inserido aqui -->
-       <div id="conteudo">
-        <!-- O modo selecionado será exibido aqui -->
-    </div>
-
-    <!-- Modo Clássico -->
-    <div id="classico-modo" class="modo" style="display:none;">
-        <h2>Modo Clássico: Adivinhe o Personagem</h2>
-        <input type="text" id="input-palavra" placeholder="Digite o nome do personagem">
-        <button id="botao-enviar">Enviar</button>
-        <div id="resultado"></div>
-    </div>
-
-    <!-- Modo Falas -->
-    <div id="falas-modo" class="modo" style="display:none;">
-        <h2>Modo Falas: Quem disse isso?</h2>
-        <div>
-            <p id="fala-texto">"Não há nada de errado em deixar as pessoas que te amam te ajudar."</p>
+        <!-- Modo Clássico (inicialmente oculto) -->
+        <div id="classico-modo" class="modo" style="display:none;">
+            <h2> Adivinhe o Personagem</h2>
+            <input type="text" id="input-palavra" list="character-suggestions" placeholder="Digite o nome do personagem">
+            <datalist id="character-suggestions">
+                <option value="Aang">
+                <option value="Katara">
+                <option value="Zuko">
+                <option value="Toph">
+                <option value="Sokka">
+                <option value="Azula">
+                <option value="Iroh">
+                <option value="Ty Lee">
+                <option value="Mai">
+                <option value="King Bumi">
+            </datalist>
+            <button id="botao-enviar">Enviar</button>
+            <div id="resultado"></div>
         </div>
-        <input type="text" id="input-falas" placeholder="Digite o nome do personagem">
-        <button id="botao-enviar-falas">Enviar</button>
-        <div id="resultado-falas"></div>
     </div>
 
-    <!-- Modo Cenas -->
-    <div id="cenas-modo" class="modo" style="display:none;">
-        <h2>Modo Cenas: De qual episódio é essa cena?</h2>
-        <img id="imagem-cena" src="img/cena1.png" alt="Cena do Avatar">
-        <input type="text" id="input-cenas" placeholder="Digite o nome do episódio">
-        <button id="botao-enviar-cenas">Enviar</button>
-        <div id="resultado-cenas"></div>
-    </div>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
