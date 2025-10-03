@@ -1,56 +1,53 @@
-const characters = [
-    { name: "Aang", gender: "Male", hairColor: "None", ageGroup: "Teenager", combatStyle: "Airbending", alignment: "Good", affiliation: "Air Nomad" },
-    { name: "Katara", gender: "Female", hairColor: "Brown", ageGroup: "Teenager", combatStyle: "Waterbending", alignment: "Good", affiliation: "Water Tribe" },
-    { name: "Zuko", gender: "Male", hairColor: "Black", ageGroup: "Teenager", combatStyle: "Firebending", alignment: "Morally Ambiguous", affiliation: "Fire Nation" },
-    { name: "Toph", gender: "Female", hairColor: "Black", ageGroup: "Teenager", combatStyle: "Earthbending", alignment: "Good", affiliation: "Earth Kingdom" },
-    { name: "Sokka", gender: "Male", hairColor: "Brown", ageGroup: "Teenager", combatStyle: "Non-Bender", alignment: "Good", affiliation: "Water Tribe" },
-    { name: "Azula", gender: "Female", hairColor: "Black", ageGroup: "Teenager", combatStyle: "Firebending", alignment: "Evil", affiliation: "Fire Nation" },
-    { name: "Iroh", gender: "Male", hairColor: "Gray", ageGroup: "Adult", combatStyle: "Firebending", alignment: "Good", affiliation: "Fire Nation" },
-    { name: "Ty Lee", gender: "Female", hairColor: "Brown", ageGroup: "Teenager", combatStyle: "Chi Blocking", alignment: "Neutral", affiliation: "Fire Nation" },
-    { name: "Mai", gender: "Female", hairColor: "Black", ageGroup: "Teenager", combatStyle: "Throwing Weapons", alignment: "Neutral", affiliation: "Fire Nation" },
-    { name: "King Bumi", gender: "Male", hairColor: "White", ageGroup: "Elder", combatStyle: "Earthbending", alignment: "Good", affiliation: "Earth Kingdom" }
+const personagens = [
+    { nome: "Aang", genero: "Masculino", corDoCabelo: "Nenhum", faixaEtaria: "Adolescente", estiloCombate: "Dobra de Ar", alinhamento: "Bom", afiliacao: "Nômade do Ar" },
+    { nome: "Katara", genero: "Feminino", corDoCabelo: "Castanho", faixaEtaria: "Adolescente", estiloCombate: "Dobra de Água", alinhamento: "Bom", afiliacao: "Tribo da Água" },
+    { nome: "Zuko", genero: "Masculino", corDoCabelo: "Preto", faixaEtaria: "Adolescente", estiloCombate: "Dobra de Fogo", alinhamento: "Moralmente Ambíguo", afiliacao: "Nação do Fogo" },
+    { nome: "Toph", genero: "Feminino", corDoCabelo: "Preto", faixaEtaria: "Adolescente", estiloCombate: "Dobra de Terra", alinhamento: "Bom", afiliacao: "Reino da Terra" },
+    { nome: "Sokka", genero: "Masculino", corDoCabelo: "Castanho", faixaEtaria: "Adolescente", estiloCombate: "Não-Dobrador", alinhamento: "Bom", afiliacao: "Tribo da Água" },
+    { nome: "Azula", genero: "Feminino", corDoCabelo: "Preto", faixaEtaria: "Adolescente", estiloCombate: "Dobra de Fogo", alinhamento: "Mau", afiliacao: "Nação do Fogo" },
+    { nome: "Iroh", genero: "Masculino", corDoCabelo: "Cinza", faixaEtaria: "Adulto", estiloCombate: "Dobra de Fogo", alinhamento: "Bom", afiliacao: "Nação do Fogo" },
+    { nome: "Ty Lee", genero: "Feminino", corDoCabelo: "Castanho", faixaEtaria: "Adolescente", estiloCombate: "Bloqueio de Chi", alinhamento: "Neutro", afiliacao: "Nação do Fogo" },
+    { nome: "Mai", genero: "Feminino", corDoCabelo: "Preto", faixaEtaria: "Adolescente", estiloCombate: "Armas de Arremesso", alinhamento: "Neutro", afiliacao: "Nação do Fogo" },
+    { nome: "Rei Bumi", genero: "Masculino", corDoCabelo: "Branco", faixaEtaria: "Idoso", estiloCombate: "Dobra de Terra", alinhamento: "Bom", afiliacao: "Reino da Terra" }
 ];
 
 // Variáveis do jogo
-let dailyCharacter = characters[Math.floor(Math.random() * characters.length)];
-let attempts = 6;
-let previousAttempts = [];
-let gameStarted = false;
+let personagemDoDia = personagens[Math.floor(Math.random() * personagens.length)];
+let tentativas = 6;
+let tentativasAnteriores = [];
+let jogoIniciado = false;
 
 // Função para iniciar o jogo
 function iniciarJogo() {
     document.getElementById("menu").style.display = "none";
     document.getElementById("classico-modo").style.display = "block";
-    gameStarted = true;
+    jogoIniciado = true;
     
     // Focar no input quando o jogo iniciar
     document.getElementById("input-palavra").focus();
 }
 
 // Função para verificar o palpite
-function checkGuess(guess) {
-    const character = characters.find(c => c.name.toLowerCase() === guess.toLowerCase());
-    if (!character) {
-        return { correct: false, hints: { "Erro": "Personagem não encontrado." } };
+function verificarPalpite(palpite) {
+    const personagem = personagens.find(p => p.nome.toLowerCase() === palpite.toLowerCase());
+    if (!personagem) {
+        return { correto: false, dicas: { "Erro": "Personagem não encontrado." } };
     }
 
-    let hints = {};
-    for (let key in dailyCharacter) {
-        if (key !== "name") {
-            if (character[key] === dailyCharacter[key]) {
-                hints[key] = "✅ Correto";
-            } else {
-                hints[key] = "❌ Errado";
-            }
+    let dicas = {};
+    for (let chave in personagemDoDia) {
+        if (chave !== "nome") {
+            const estaCorreto = personagem[chave] === personagemDoDia[chave];
+            dicas[chave] = { correto: estaCorreto, valor: personagem[chave] };
         }
     }
-    return { correct: character.name === dailyCharacter.name, hints };
+    return { correto: personagem.nome === personagemDoDia.nome, dicas };
 }
 
 // Função para obter o caminho da imagem do personagem
-function getCharacterImage(characterName) {
+function obterImagemPersonagem(nomePersonagem) {
     // Mapear nomes para nomes de arquivo
-    const imageMap = {
+    const mapaImagens = {
         "Aang": "Aang.png",
         "Katara": "Katara.png", 
         "Zuko": "Zuko.png",
@@ -60,123 +57,125 @@ function getCharacterImage(characterName) {
         "Iroh": "Iroh.png",
         "Ty Lee": "Ty_Lee.png",
         "Mai": "Mai.png",
-        "King Bumi": "King_Bumi.png"
+        "Rei Bumi": "King_Bumi.png"
     };
     
-    return `img/${imageMap[characterName] || 'classico.png'}`;
+    return `img/${mapaImagens[nomePersonagem] || 'classico.png'}`;
 }
 
 // Função para criar caixas de características
-function createCharacteristicBoxes(hints) {
-    return Object.keys(hints).map(key => {
-        const isCorrect = hints[key] === "✅ Correto";
+function criarCaixasCaracteristicas(dicas) {
+    return Object.keys(dicas).map(chave => {
+        const info = dicas[chave];
+        const estaCorreto = info.correto === true;
+        const valorMostrado = info.valor;
         return `
-            <div class="characteristic-box ${isCorrect ? 'correct' : 'incorrect'}">
-                <div class="characteristic-name">${key}</div>
-                <div class="characteristic-value">${isCorrect ? '✓' : '✗'}</div>
+            <div class="characteristic-box ${estaCorreto ? 'correct' : 'incorrect'}">
+                <div class="characteristic-name">${chave}</div>
+                <div class="characteristic-value">${valorMostrado}</div>
             </div>
         `;
     }).join('');
 }
 
 // Função para criar exibição de palpites anteriores
-function createPreviousGuessesHTML() {
+function criarHTMLPalpitesAnteriores() {
     // Inverter a ordem para mostrar o mais recente primeiro
-    return previousAttempts.slice().reverse().map(attempt => {
-        let attemptBoxes = createCharacteristicBoxes(attempt.hints);
+    return tentativasAnteriores.slice().reverse().map(tentativa => {
+        let caixasTentativa = criarCaixasCaracteristicas(tentativa.dicas);
         
         return `
             <div class="previous-attempt">
-                <div class="attempt-name">${attempt.name}</div>
-                <div class="attempt-boxes">${attemptBoxes}</div>
+                <div class="attempt-name">${tentativa.nome}</div>
+                <div class="attempt-boxes">${caixasTentativa}</div>
             </div>
         `;
     }).join('');
 }
 
 // Função para processar o palpite
-function processGuess() {
-    const guessInput = document.getElementById("input-palavra");
-    const guess = guessInput.value.trim();
+function processarPalpite() {
+    const inputPalavra = document.getElementById("input-palavra");
+    const palpite = inputPalavra.value.trim();
 
-    if (!guess) {
+    if (!palpite) {
         alert("Digite um nome antes de enviar!");
         return;
     }
 
-    const result = checkGuess(guess);
+    const resultado = verificarPalpite(palpite);
     let resultadoDiv = document.getElementById("resultado");
 
-    previousAttempts.push({ name: guess, hints: result.hints });
+    tentativasAnteriores.push({ nome: palpite, dicas: resultado.dicas });
 
-    if (result.correct) {
-        const characterImage = getCharacterImage(dailyCharacter.name);
+    if (resultado.correto) {
+        const imagemPersonagem = obterImagemPersonagem(personagemDoDia.nome);
         resultadoDiv.innerHTML = `
             <div class="victory-message">
                 <div class="victory-content">
                     <div class="victory-image">
-                        <img src="${characterImage}" alt="${dailyCharacter.name}" class="character-img large">
+                        <img src="${imagemPersonagem}" alt="${personagemDoDia.nome}" class="character-img large">
                     </div>
                     <div class="victory-text">
                         <h2>🎉 Parabéns! Você acertou!</h2>
-                        <p>O personagem era: <strong>${dailyCharacter.name}</strong></p>
-                        <p>Tentativas usadas: ${7 - attempts}</p>
+                        <p>O personagem era: <strong>${personagemDoDia.nome}</strong></p>
+                        <p>Tentativas usadas: ${7 - tentativas}</p>
                         <button onclick="reiniciarJogo()" class="restart-btn">Jogar Novamente</button>
                     </div>
                 </div>
             </div>
         `;
-        gameStarted = false;
+        jogoIniciado = false;
     } else {
-        attempts--;
+        tentativas--;
 
-        let boxesHTML = createCharacteristicBoxes(result.hints);
-        let previousGuessesHTML = createPreviousGuessesHTML();
+        let caixasHTML = criarCaixasCaracteristicas(resultado.dicas);
+        let palpitesAnterioresHTML = criarHTMLPalpitesAnteriores();
 
         resultadoDiv.innerHTML = `
             <div class="current-attempt">
                 <div class="attempt-status">
                     ❌ Personagem Errado! 
-                    <br>🔄 Tentativas restantes: ${attempts}
+                    <br>🔄 Tentativas restantes: ${tentativas}
                 </div>
             </div>
             <div class="previous-guesses">
                 <strong>Palpites anteriores:</strong>
-                ${previousGuessesHTML}
+                ${palpitesAnterioresHTML}
             </div>
         `;
 
-        if (attempts === 0) {
-            const characterImage = getCharacterImage(dailyCharacter.name);
+        if (tentativas === 0) {
+            const imagemPersonagem = obterImagemPersonagem(personagemDoDia.nome);
             resultadoDiv.innerHTML = `
                 <div class="game-over-message">
                     <div class="game-over-content">
                         <div class="game-over-image">
-                            <img src="${characterImage}" alt="${dailyCharacter.name}" class="character-img large">
+                            <img src="${imagemPersonagem}" alt="${personagemDoDia.nome}" class="character-img large">
                         </div>
                         <div class="game-over-text">
                             <h2>☠️ Fim de jogo!</h2>
-                            <p>O personagem era: <strong>${dailyCharacter.name}</strong></p>
+                            <p>O personagem era: <strong>${personagemDoDia.nome}</strong></p>
                             <button onclick="reiniciarJogo()" class="restart-btn">Tentar Novamente</button>
                         </div>
                     </div>
                 </div>
             `;
-            gameStarted = false;
+            jogoIniciado = false;
         }
     }
 
-    guessInput.value = "";
-    guessInput.focus();
+    inputPalavra.value = "";
+    inputPalavra.focus();
 }
 
 // Função para reiniciar o jogo
 function reiniciarJogo() {
     // Escolher novo personagem aleatório
-    dailyCharacter = characters[Math.floor(Math.random() * characters.length)];
-    attempts = 6;
-    previousAttempts = [];
-    gameStarted = true;
+    personagemDoDia = personagens[Math.floor(Math.random() * personagens.length)];
+    tentativas = 6;
+    tentativasAnteriores = [];
+    jogoIniciado = true;
     
     // Limpar resultado
     document.getElementById("resultado").innerHTML = "";
@@ -189,30 +188,30 @@ function reiniciarJogo() {
 // Event listeners
 document.addEventListener("DOMContentLoaded", function() {
     // Botão enviar
-    document.getElementById("botao-enviar").addEventListener("click", processGuess);
+    document.getElementById("botao-enviar").addEventListener("click", processarPalpite);
     
     // Enter no input
     document.getElementById("input-palavra").addEventListener("keypress", function(e) {
         if (e.key === "Enter") {
-            processGuess();
+            processarPalpite();
         }
     });
     
     // Dica: mostrar lista de personagens disponíveis
     document.getElementById("input-palavra").addEventListener("focus", function() {
-        if (gameStarted && previousAttempts.length === 0) {
-            const characterNames = characters.map(c => c.name).join(", ");
-            this.placeholder = `Digite um nome (ex: ${characterNames.split(", ")[0]})`;
+        if (jogoIniciado && tentativasAnteriores.length === 0) {
+            const nomesPersonagens = personagens.map(p => p.nome).join(", ");
+            this.placeholder = `Digite um nome (ex: ${nomesPersonagens.split(", ")[0]})`;
         }
     });
 });
 
 // Função para mostrar dicas (opcional)
 function mostrarDica() {
-    if (previousAttempts.length >= 2) {
-        const availableHints = Object.keys(dailyCharacter).filter(key => key !== "name");
-        const randomHint = availableHints[Math.floor(Math.random() * availableHints.length)];
-        alert(`Dica: O personagem tem ${randomHint}: ${dailyCharacter[randomHint]}`);
+    if (tentativasAnteriores.length >= 2) {
+        const dicasDisponiveis = Object.keys(personagemDoDia).filter(chave => chave !== "nome");
+        const dicaAleatoria = dicasDisponiveis[Math.floor(Math.random() * dicasDisponiveis.length)];
+        alert(`Dica: O personagem tem ${dicaAleatoria}: ${personagemDoDia[dicaAleatoria]}`);
     } else {
         alert("Faça pelo menos 2 tentativas para receber uma dica!");
     }
